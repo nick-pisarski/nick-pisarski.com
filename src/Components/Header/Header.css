@@ -4,8 +4,13 @@
 
 .navbar-inverse .navbar-nav>li>a {
     color: #009999;
-    font-weight: bold;
-  letter-spacing: .12em;    
+    letter-spacing: .15em;    
+}
+
+.navbar-inverse .navbar-nav>li{
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
 }
 
 .navbar-inverse .navbar-brand {
