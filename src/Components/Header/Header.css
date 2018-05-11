@@ -1,0 +1,23 @@
+.navbar .container{
+    width: auto;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #009999;
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #009999;
+}
+
+.navbar-inverse .navbar-brand:hover {
+    color: #99ffff;
+    cursor: pointer;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #99ffff;
+    font-weight: bold;
+}
+
