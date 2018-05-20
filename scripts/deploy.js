@@ -5,8 +5,8 @@ const path = require("path"); // utility from node.js to manage file/folder path
 
 // configuration necessary for this script to run
 const config = {
-  s3BucketName: 'pisarskitestbucket',
-  folderPath: '../dist' // path relative script's location
+  s3BucketName: 'nick-pisarski.com',
+  folderPath: '../build' // path relative script's location
 };
 
 // initialise S3 client
