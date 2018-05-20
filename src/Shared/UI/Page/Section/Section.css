@@ -1,0 +1,23 @@
+.Section{
+    background-color: aquamarine;
+    padding: 4px;
+    margin: 8px 8px;
+    box-sizing: border-box;
+}
+.Section .content{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: column nowrap;
+    box-sizing: border-box;
+}
+
+.Section > h3.title {
+    margin: 8px 4px;
+}
+
+@media( max-width: 767px){
+    .Section{
+        margin: 8px 0px;
+    }
+}
