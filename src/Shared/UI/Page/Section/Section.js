@@ -39,7 +39,6 @@ class Section extends Component{
     }
 
     render() {
-        const {showContent} = this.state;
         return (
             <div className={this._getClassName()}>
                 <div className="title_container">
