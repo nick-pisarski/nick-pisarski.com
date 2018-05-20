@@ -33,7 +33,7 @@ class Section extends Component{
 
     _getToggleButton = () => {
         if(this.props.disableShowContent) return;
-        return (<div className="toggle" onClick={e => this._toggleDisplay()}>
+        return (<div className="toggle" style={{cursor: 'pointer', fontWeight:'bold'}} onClick={e => this._toggleDisplay()}>
                     {this.state.showContent ? 'hide' : 'show'}
                 </div>)
     }
