@@ -1,7 +1,8 @@
 .Section{
-    background-color: aquamarine;
-    padding: 4px;
-    margin: 8px 8px;
+    background-color: rgba(128, 128, 128, 0.1);
+    padding: 8px;
+    margin: 16px 0px;
+    border-radius: 4px;
     box-sizing: border-box;
 }
 .Section .content{
@@ -11,13 +12,18 @@
     flex-flow: column nowrap;
     box-sizing: border-box;
 }
-
-.Section > h3.title {
+.Section .title_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Section .title_container > h3.title {
     margin: 8px 4px;
+    color: #99FFFF;
 }
 
-@media( max-width: 767px){
+/* @media( max-width: 767px){
     .Section{
         margin: 8px 0px;
     }
-}
+} */

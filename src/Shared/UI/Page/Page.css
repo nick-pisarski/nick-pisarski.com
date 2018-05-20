@@ -1,9 +1,10 @@
 .Page{
     height: 100%;
     margin: 1% 2%;
-    padding: 2%;
+    padding: 1%;
     box-sizing: border-box;
-    background-color: dimgrey;
+    background-color: transparent;
+    border-radius: 4px;
 }
 
 @media(max-width: 767px){
@@ -14,7 +15,7 @@
 
 .Page h2.title{
     margin-top: 0;
-    color: white;
+    color: #99ffff;
 }
 
 .Page h2.title > span.subtitle{
