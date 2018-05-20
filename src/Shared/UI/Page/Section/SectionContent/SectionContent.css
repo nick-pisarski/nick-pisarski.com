@@ -1,0 +1,7 @@
+.SectionContent{
+    color: maroon;
+    border: 1px solid firebrick;
+    margin: 4px;
+    padding: 4px;
+    box-sizing: border-box;
+}

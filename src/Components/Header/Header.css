@@ -1,0 +1,32 @@
+.navbar .container{
+    width: auto;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #009999;
+    letter-spacing: .15em;    
+}
+
+.navbar-inverse .navbar-nav>li{
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.navbar-inverse .navbar-brand {
+    color: #009999;
+}
+
+.navbar-inverse .navbar-brand:hover {
+    color: #99ffff;
+    cursor: pointer;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #99ffff;
+    font-weight: bold;
+}
+
