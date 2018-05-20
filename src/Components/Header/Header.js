@@ -25,17 +25,20 @@ class Header extends Component{
                     <Nav>
                         <LinkContainer to="/projects"><NavItem>Projects</NavItem></LinkContainer>
                         <LinkContainer to="/apps"><NavItem>Apps</NavItem></LinkContainer>
-                        <LinkContainer to="/aboutme"><NavItem>About Me</NavItem></LinkContainer>
+                        <NavDropdown eventKey={1} title='About Me' id="about-me-nav">
+                            <LinkContainer to="/aboutme" exact>
+                                <MenuItem eventKey={1}>About Me</MenuItem>
+                            </LinkContainer>
+                            <LinkContainer to="/aboutme/resume" exact>
+                                <MenuItem eventKey={2} >Resume</MenuItem>
+                            </LinkContainer>
+                        </NavDropdown>
                     </Nav>
-                    <Nav pullRight>
-                    <NavDropdown eventKey={3} title={this.state.user.username} id="user-details">
-                        <LinkContainer to="/settings"><MenuItem>Login</MenuItem></LinkContainer>
-                        <LinkContainer to="/settings"><MenuItem>Sign Up</MenuItem></LinkContainer>
-                        <LinkContainer to="/settings"><MenuItem eventKey={3.1}>Settings</MenuItem></LinkContainer>
-                        <MenuItem divider />
-                        <MenuItem eventKey={3.2}>Sign Out</MenuItem>
-                    </NavDropdown>
 
+                    <Nav pullRight>
+                        <NavDropdown eventKey={1} title={this.state.user.username} id="user-details">
+                            <LinkContainer to="/settings"><MenuItem eventKey={1}>Settings</MenuItem></LinkContainer>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
