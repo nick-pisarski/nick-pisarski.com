@@ -11,6 +11,9 @@
     .Page{
         margin: 0;
     }
+    .Page h2.title{
+        text-align: center;
+    }
 }
 
 .Page h2.title{
