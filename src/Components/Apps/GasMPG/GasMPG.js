@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
+import {Section, SectionContent} from '../../../Shared/UI/UI';
+import Chart from './Chart/Chart';
+import DataTable from './DataTable/DataTable';
 
+import mockData from './mockMPGData.json';
+
+import "./GasMPG.css";
 
 class GasMPG extends Component{
+    state = {
+        data: mockData
+    }
     
     render(){
+        const {data} = this.state;
         return (
             <div className="GasMPG">
-                <div>Chart Goes Here</div>
-                <div>Data Table GOes Here</div>
+                <Section>
+                    <SectionContent className='chart'>
+                        <Chart/>
+                    </SectionContent>
+                </Section>
+                <Section>
+                    <SectionContent className='data'>
+                        <DataTable data={data}/>                    
+                    </SectionContent>
+                </Section>
             </div>
         );
     }

@@ -1,5 +1,17 @@
 .GasMPG{
-    background-color: red;
+    /* background-color: red; */
     height: 100%;
     width: 100%;
+}
+
+.GasMPG .chart{
+    height: 500px;
+    width: 100%;
+    background-color: beige;
+}
+
+.GasMPG .data{
+    height: 500px;
+    width: 100%;
+    background-color: beige;
 }
