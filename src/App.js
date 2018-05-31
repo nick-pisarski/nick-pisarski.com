@@ -7,6 +7,7 @@ import ProjectsPage from './Components/Pages/Projects/ProjectsPage';
 import AppsPage from './Components/Pages/Apps/AppsPage';
 import AboutMePage from './Components/Pages/AboutMe/AboutMePage';
 import ResumePage from './Components/Pages/AboutMe/Resume/ResumePage';
+import GasMPG from './Components/Apps/GasMPG/GasMPG';
 
 import SettingsPage from './Components/Pages/Settings/SettingsPage';
 
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/aboutme/resume" component={ResumePage} />          
             <Route path="/aboutme" component={AboutMePage} />
             <Route path="/apps" component={AppsPage} />
+            <Route path="/gasmpg" component={GasMPG} />
             <Route path="/projects" component={ProjectsPage} />
             <Route path="/" exact component={HomePage} />
             <Route path="*" exact component={HomePage} />
