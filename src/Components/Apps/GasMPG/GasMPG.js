@@ -18,7 +18,7 @@ class GasMPG extends Component{
             <div className="GasMPG">
                 <Section>
                     <SectionContent className='chart'>
-                        <Chart/>
+                        <Chart data={data}/>
                     </SectionContent>
                 </Section>
                 <Section>
