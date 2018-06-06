@@ -390,5 +390,21 @@
    "miles_per_gallon": 40.72,
    "cost_per_gallon": 2.67,
    "total_cost": 39.02
+ },
+ {
+   "date": "5/14/2018",
+   "miles": 602.6,
+   "gallons": 14.453,
+   "miles_per_gallon": 41.69,
+   "cost_per_gallon": 2.7,
+   "total_cost": 39.01
+ },
+ {
+   "date": "5/30/2018",
+   "miles": 461.2,
+   "gallons": 13.822,
+   "miles_per_gallon": 33.37,
+   "cost_per_gallon": 2.75,
+   "total_cost": 38.00
  }
 ]
