@@ -2,6 +2,7 @@
   "name": "nick-pisarski",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://nick-pisarski.com/",
   "dependencies": {
     "chart.js": "^2.7.2",
     "react": "^16.4.1",
@@ -19,6 +20,7 @@
   },
   "scripts": {
     "deploy": "react-scripts build && node ./scripts/deploy.js",
+    "nbdeploy": "clear && node ./scripts/deploy.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

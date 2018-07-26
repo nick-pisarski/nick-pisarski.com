@@ -23,10 +23,11 @@ function unixifyPath(filepath) {
 };
 
 function getFileSize(filepath) {
-  const stats = fs.statSync(filepath);
-  const fileSize = stats.size;
-  return fileSize / 1000;
+  const stats = fs.statSync(filepath);  
+  return stats.size / 1024;
 }
+
+let fileSizeTotal = 0;
 // Recurse into a directory, executing callback for each file.
 function walk(rootdir, callback, subdir) {
   // is sub-directory
@@ -34,7 +35,6 @@ function walk(rootdir, callback, subdir) {
   // absolute path
   const abspath = subdir ? path.join(rootdir, subdir) : rootdir;
 
-  let fileSizeTotal = 0;
   // read all files in the current directory
   fs.readdirSync(abspath).forEach((filename) => {
     // full file path
@@ -52,7 +52,7 @@ function walk(rootdir, callback, subdir) {
         // map the current file with the respective MIME type
         const mimeType = mime.lookup(filepath);
         const fileSize = getFileSize(filepath);
-        fileSizeTotal += fileSize;
+        
         // build S3 PUT object request
         const s3Obj = {
           // set appropriate S3 Bucket path
@@ -63,17 +63,25 @@ function walk(rootdir, callback, subdir) {
         }
 
         // upload file to S3
-        s3.putObject(s3Obj, (res) => {
-          console.log(`Successfully uploaded '${filepath}', MIME type '${mimeType}', Size: ${fileSize}kb`)
+        s3.putObject(s3Obj, (err, res) => {
+          if(err) throw err;
+          fileSizeTotal += fileSize;
+          callback(subdir, filename, fileSize, fileSizeTotal);
         })
       })
     }
   })
 
-  console.log(`Finished. Uploaded ${fileSizeTotal}kb to Bucket:${config.s3BucketName}.`)
 }
-
+console.log('Starting upload process.....\n');
 // start upload process
-walk(distFolderPath, (filepath, rootdir, subdir, filename) => {
-  console.log('Filepath', filepath);
+walk(distFolderPath, (folderpath, filename, fileSize, totalFileSize) => {
+  const p = path.join('/', folderpath || '');
+  const fs = fileSize.toFixed(2);
+  const tfs = totalFileSize.toFixed(2)
+  console.log(`Successfully uploaded to ${config.s3BucketName}
+    File: ${filename}
+    Folder: ${p}
+    Size: ${fs} KB
+    Total: ${tfs} KB`);
 });
