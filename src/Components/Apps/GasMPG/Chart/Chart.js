@@ -114,7 +114,7 @@ class Chart extends Component{
                         standalone={false}
                         />            
                     <VictoryAxis 
-                        tickFormat={y => y.toFixed(0)} 
+                        tickFormat={y => y.toFixed(2)} 
                         label='Miles Per Gallon'
                         axisLabelComponent={
                             <VictoryLabel dy={-30}/>
