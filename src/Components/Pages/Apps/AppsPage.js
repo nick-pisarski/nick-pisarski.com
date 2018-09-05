@@ -11,7 +11,7 @@ class AppsPage extends Component{
                 <Section title='Gas MPG Tracker'>
                     <SectionContent>
                         A tool help track your car's miles per gallon over time.
-                        <LinkContainer to="/gasmpg"><div>See it Here</div></LinkContainer>
+                        <LinkContainer to="/apps/gasmpg"><div>See it Here</div></LinkContainer>
                     </SectionContent>
                 </Section>
             </Page>

@@ -69,14 +69,14 @@ class Chart extends Component{
         const calculatedStateValues = getCalculations(props.data, props.y_prop);
         return calculatedStateValues;
     }      
-
+    // need to do something here so that the data being graphed is what is being displayed and all the statistics
+    // get udpated as the zoom changes
     handleZoom = (domain) => this.setState({selectedDomain: domain});
     
     handleBrush= (domain) => this.setState({zoomDomain: domain});
 
     render(){
         const {data, avg_data, y_domain, avg_color, data_color, width, height, min_value, max_value} = this.state;
-        console.log(this.state)
         const mid_point = Math.round(data.length/2);
         return (
             <div className="Chart">
@@ -130,8 +130,8 @@ class Chart extends Component{
                             data: { stroke: data_color},
                         }}
                         labels={val => {
-                            if(val.y === max_value) return `MAX: ${val.y}`
-                            if(val.y === min_value) return `MIN: ${val.y}`
+                            if(val.y === max_value) return `MAX: ${val.y.toFixed(2)}`
+                            if(val.y === min_value) return `MIN: ${val.y.toFixed(2)}`
                             return
                         }}
                         interpolation="natural"

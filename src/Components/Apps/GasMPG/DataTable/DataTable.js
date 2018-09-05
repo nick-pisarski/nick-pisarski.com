@@ -24,7 +24,7 @@ class DataTable extends Component{
     renderTableCell = (item, key, isHeader=false) => {
         const cellClass = isHeader  ? 'cell header' : 'cell';
 
-        item = item === "number" ? this.renderNumber(item) : item; 
+        item = typeof item === "number" ? this.renderNumber(item) : item; 
 
         return <div className={cellClass} key={key} style={{width: `${this.state.colWidth}%`}}>{item}</div>
     }
@@ -48,7 +48,8 @@ class DataTable extends Component{
             gallons: 'Gallons',
             miles_per_gallon: 'Miles Per Gallon',
             cost_per_gallon: 'Cost Per Gallon',
-            total: 'Total Cost'
+            total: 'Total Cost',
+            notes: 'Notes'
         }
         return this.renderTableRow(item, 'header', true);
     }

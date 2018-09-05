@@ -23,8 +23,8 @@ class App extends Component {
           
             <Route path="/aboutme/resume" component={ResumePage} />          
             <Route path="/aboutme" component={AboutMePage} />
+            <Route path="/apps/gasmpg" exact component={GasMPG} />
             <Route path="/apps" component={AppsPage} />
-            <Route path="/gasmpg" component={GasMPG} />
             <Route path="/projects" component={ProjectsPage} />
             <Route path="/" exact component={HomePage} />
             <Route path="*" exact component={HomePage} />
