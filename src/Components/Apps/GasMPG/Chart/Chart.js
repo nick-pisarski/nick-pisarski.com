@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import _ from 'lodash'
+import moment from 'moment'
 // import Chart from 'chart.js';
 import {VictoryLine, VictoryChart, VictoryAxis, VictoryLabel,   VictoryLegend, VictoryTheme, VictoryBrushContainer, VictoryZoomContainer }from 'victory';
 import "./Chart.css"
@@ -14,6 +15,7 @@ const formatData = (data, y_prop) => {
         };
     });
 }
+
 
 const getAverage = (data) => {
     const sum = data.reduce((sum, next, iter) => {
@@ -153,12 +155,13 @@ class Chart extends Component{
                         />
                 </VictoryChart>
                 
-                <VictoryChart scale={{ x: "time" }} domain={{y:y_domain}}
+                <VictoryChart scale={{ x: "time" }} domain={{y: y_domain}}
                     theme={VictoryTheme.material}
                     width={width/3}
                     height={height/2}
                     containerComponent={
-                        <VictoryBrushContainer responsive={false}
+                        <VictoryBrushContainer 
+                            responsive={false}
                             brushDimension="x"
                             brushDomain={this.state.selectedDomain}
                             onBrushDomainChange={this.handleBrush.bind(this)}
@@ -166,9 +169,9 @@ class Chart extends Component{
                       }
                         >        
                     <VictoryAxis 
-                        tickFormat={x => new Date(x).getFullYear()} 
+                        tickFormat={x => new Date(x).getFullYear()}
+                        tickCount={_.uniq(data.map(val => new Date(val.x).getFullYear())).length}
                         crossAxis
-                        standalone={false}
                         />                                  
                     
                     <VictoryLine
