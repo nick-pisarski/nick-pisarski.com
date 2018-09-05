@@ -1,0 +1,27 @@
+.Page{
+    height: 100%;
+    margin: 1% 2%;
+    padding: 1%;
+    box-sizing: border-box;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+@media(max-width: 767px){
+    .Page{
+        margin: 0;
+    }
+    .Page h2.title{
+        text-align: center;
+    }
+}
+
+.Page h2.title{
+    margin-top: 0;
+    color: #99ffff;
+}
+
+.Page h2.title > span.subtitle{
+    font-size: 16px;    
+    color: cornsilk;
+}

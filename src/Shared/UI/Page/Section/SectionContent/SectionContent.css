@@ -1,0 +1,8 @@
+.SectionContent{
+    /* color: maroon; */
+    background-color: rgba(256, 256, 256, 0.5);
+    border-radius: 4px;
+    margin: 4px;
+    padding: 8px;
+    box-sizing: border-box;
+}

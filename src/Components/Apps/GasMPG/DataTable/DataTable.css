@@ -1,0 +1,63 @@
+.DataTableContainer {
+    height: 100%;
+    width: 100%;
+    padding: 25px;
+}
+
+.DataTable {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+.DataTable .row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid gray;
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+
+.DataTable .row.header{
+    background-color: lightgray;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    border-top: 1px solid gray;
+}
+
+.DataTable .row:hover {
+    background-color: #eeeeee;
+}
+
+.DataTable .cell{
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px;    
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-left: 1px solid #aaaaaa;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.DataTable .row .cell:last-child{
+    border-right: 1px solid #aaaaaa;
+}
+
+.DataTable .row .cell:first-child{
+    justify-content: center;
+}
+
+.DataTable .cell.header{
+    font-weight: bold;
+    justify-content: center;
+}
