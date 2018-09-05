@@ -9,7 +9,7 @@ const domain_offset = 5;
 const formatData = (data, y_prop) => {
     return data.map((item, iter) => {
         return{
-            x: new Date( item['date']),
+            x: item['created'],
             y: item[y_prop]
         };
     });

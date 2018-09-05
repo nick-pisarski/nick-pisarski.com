@@ -13,7 +13,7 @@ class DataTable extends Component{
     componentDidMount(){
         if(this.props.data.length > 0){
             const item = this.props.data[0]
-            const dataKeys = Object.keys(item);
+            const dataKeys = Object.keys(item).filter(item => item !== 'id');
             const colWidth = 100 / dataKeys.length;
             this.setState({dataKeys, colWidth});
         }
@@ -22,20 +22,20 @@ class DataTable extends Component{
     renderNumber = item => item.toFixed(2);
 
     renderTableCell = (item, key, isHeader=false) => {
-        let cellClass = 'cell';
-        if(isHeader) cellClass = 'cell header';
-        if(typeof item === "number") item = this.renderNumber(item);
+        const cellClass = isHeader  ? 'cell header' : 'cell';
+
+        item = item === "number" ? this.renderNumber(item) : item; 
+
         return <div className={cellClass} key={key} style={{width: `${this.state.colWidth}%`}}>{item}</div>
     }
 
     renderTableRow = (item, key, isHeader=false) => {
-        let rowClass = 'row';
-        if(isHeader) rowClass = 'row header';
+        const rowClass = isHeader ? 'row header' : 'row';
 
         return (
             <div key={key} className={rowClass} style={{height: `${this.state.rowHeight}px`}}>
                 {this.state.dataKeys.map((data_key, iter) => {
-                    return this.renderTableCell(item[data_key], `${key}${iter}`, isHeader);
+                    return this.renderTableCell(item[data_key], `${key}_cell${iter}`, isHeader);
                 })}
             </div>
         );
@@ -43,21 +43,21 @@ class DataTable extends Component{
 
     renderTableHeader = () => {
         const item = {
-            date: 'Date',
+            created: 'Date',
             miles: 'Miles',
             gallons: 'Gallons',
             miles_per_gallon: 'Miles Per Gallon',
             cost_per_gallon: 'Cost Per Gallon',
-            total_cost: 'Total Cost'
+            total: 'Total Cost'
         }
-        return this.renderTableRow(item, null, true);
+        return this.renderTableRow(item, 'header', true);
     }
     
     render(){
         const {data} = this.props;
         const renderedHeader = this.renderTableHeader();
         const renderedData = data.map((item, iter) => {
-            return (this.renderTableRow(item, iter))
+            return (this.renderTableRow(item, `row${iter}`))
         })
 
         return (
