@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Section, SectionContent, LoadingIcon} from '../../../Shared/UI/UI';
 import Chart from './Chart/Chart';
 import DataTable from './DataTable/DataTable';
+import MPGEntryForm from './MGPEntryForm/MPGEntyForm';
 
 import Axios from 'axios';
 import moment from 'moment';
@@ -39,6 +40,7 @@ class GasMPG extends Component{
                 <Section>
                     <SectionContent className='stats-container'>
                         <div className='stats'> Stats</div>
+                        <MPGEntryForm/>
                     </SectionContent>
                 </Section>
                 <Section>

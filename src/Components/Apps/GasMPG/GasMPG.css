@@ -13,11 +13,14 @@
     background-color: beige;
 }
 
-
 .GasMPG .stats{
     height: 100%;
-    width: 40%;
+    width: 75%;
     background-color: darkcyan;
+}
+
+.GasMPG .stats-container{
+    width: 100%;
 }
 
 .GasMPG .data{
