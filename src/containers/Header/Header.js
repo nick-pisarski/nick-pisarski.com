@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import {loginUser} from './ducks';
 
 import { Navbar, Nav, NavItem , NavDropdown, MenuItem} from 'react-bootstrap';
 import { LinkContainer } from "react-router-bootstrap";
@@ -7,11 +10,13 @@ import "./Header.css"
 
 
 class Header extends Component{
-    state = {
-        user: {
-            username: 'nickp'
-        }
+    componentDidMount(){
+        console.log('here')
+        this.props.login({
+            name: 'johnFrank'
+        })
     }
+
     render(){
         return (
             <Navbar inverse collapseOnSelect>
@@ -36,7 +41,7 @@ class Header extends Component{
                     </Nav>
 
                     <Nav pullRight>
-                        <NavDropdown eventKey={1} title={this.state.user.username} id="user-details">
+                        <NavDropdown eventKey={1} title={this.props.user.name} id="user-details">
                             <LinkContainer to="/settings"><MenuItem eventKey={1}>Settings</MenuItem></LinkContainer>
                         </NavDropdown>
                     </Nav>
@@ -46,4 +51,17 @@ class Header extends Component{
     }
 }
 
-export default Header;
+
+const mapStateToProps = state => {
+    return {
+        user: state.header.user
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        login: (user) => dispatch(loginUser(user))
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

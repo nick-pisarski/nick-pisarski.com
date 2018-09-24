@@ -9,7 +9,7 @@ const initialState = {
 };
 
 // Reducer
-export default function reducer(state = {}, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     // do reducer stuff
     default: return state;

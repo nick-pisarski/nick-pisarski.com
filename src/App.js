@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import { Route, Switch } from "react-router-dom";
 
-import Header from './Components/Header/Header';
-import HomePage from './Components/Pages/HomePage/HomePage';
-import ProjectsPage from './Components/Pages/Projects/ProjectsPage';
-import AppsPage from './Components/Pages/Apps/AppsPage';
-import AboutMePage from './Components/Pages/AboutMe/AboutMePage';
-import ResumePage from './Components/Pages/AboutMe/Resume/ResumePage';
-import GasMPG from './Components/Apps/GasMPG/GasMPG';
+import Header from '@containers/Header/Header';
+import HomePage from '@components/pages/HomePage/HomePage';
+import ProjectsPage from '@components/pages/Projects/ProjectsPage';
+import AppsPage from '@components/pages/Apps/AppsPage';
+import AboutMePage from '@components/pages/AboutMe/AboutMePage';
+import ResumePage from '@components/pages/AboutMe/Resume/ResumePage';
+import GasMPG from '@containers/MPGTracker/MPGTracker';
 
-import SettingsPage from './Components/Pages/Settings/SettingsPage';
+import SettingsPage from '@components/pages/Settings/SettingsPage';
 
-import './App.css';
+import 'App.css';
 
 class App extends Component {
   render() {
@@ -34,4 +35,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(App);
