@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import {Section, SectionContent, LoadingIcon} from '../../../Shared/UI/UI';
+import {Section, SectionContent, LoadingIcon} from '@shared/ui/index';
 import Chart from './Chart/Chart';
 import DataTable from './DataTable/DataTable';
-import MPGEntryForm from './MGPEntryForm/MPGEntyForm';
 
 import Axios from 'axios';
 import moment from 'moment';
 
-import "./GasMPG.css";
+import "./MPGTracker.css";
 
 class GasMPG extends Component{
     state = {

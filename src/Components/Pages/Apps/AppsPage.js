@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import {Page, Section, SectionContent} from './../../../Shared/UI/UI';
+import {Page, Section, SectionContent} from '@shared/ui/index';
 import {LinkContainer} from 'react-router-bootstrap'
 
 import data from './data.json';

@@ -2,7 +2,7 @@
 
 #####  Site to od:
 
-- [ ] Implement Redux ***IMPORTANT!***
+- [x] Implement Redux ***IMPORTANT!***
 - [ ] Work the design, needs something cleaner
 - [ ] Add authentication
     * Lock api and site to my ip address or computer in the mean time????
@@ -12,7 +12,7 @@
     - [ ] used to manage static content of site
         * can store in s3 bucket as JSON obj
     - [ ] user authentication
-     * use sign in with google or facebook
+        * use sign in with google or facebook
   
 ##### MPG Tracker To do:
 - [ ] Input form

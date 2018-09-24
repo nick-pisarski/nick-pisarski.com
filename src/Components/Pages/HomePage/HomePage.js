@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import {Page, Section, SectionContent} from './../../../Shared/UI/UI';
+import {Page, Section, SectionContent} from '@shared/ui/index';
 
 import data from './data.json';
 

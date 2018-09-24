@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import _ from 'lodash'
-import moment from 'moment'
-// import Chart from 'chart.js';
 import {VictoryLine, VictoryChart, VictoryAxis, VictoryLabel,   VictoryLegend, VictoryTheme, VictoryBrushContainer, VictoryZoomContainer }from 'victory';
 import "./Chart.css"
 
