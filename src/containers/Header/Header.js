@@ -10,12 +10,6 @@ import "./Header.css"
 
 
 class Header extends Component{
-    // componentDidMount(){
-    //     this.props.login({
-    //         name: 'johnFrank'
-    //     })
-    // }
-
     _renderLogin = () => {
         if(!this.props.isUserLoggedIn){
             return (
@@ -26,7 +20,7 @@ class Header extends Component{
         };
         return (
             <NavDropdown eventKey={1} title={this.props.user.name} id="user-details">
-                <LinkContainer to="/settings"><MenuItem eventKey={1}>Settings</MenuItem></LinkContainer>
+                <LinkContainer to="/"><MenuItem eventKey={1}>Settings</MenuItem></LinkContainer>
             </NavDropdown>
         )
     }
@@ -41,16 +35,7 @@ class Header extends Component{
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        <LinkContainer to="/projects"><NavItem>Projects</NavItem></LinkContainer>
                         <LinkContainer to="/apps"><NavItem>Apps</NavItem></LinkContainer>
-                        <NavDropdown eventKey={1} title='About Me' id="about-me-nav">
-                            <LinkContainer to="/aboutme" exact>
-                                <MenuItem eventKey={1}>About Me</MenuItem>
-                            </LinkContainer>
-                            <LinkContainer to="/aboutme/resume" exact>
-                                <MenuItem eventKey={2} >Resume</MenuItem>
-                            </LinkContainer>
-                        </NavDropdown>
                     </Nav>
 
                     <Nav pullRight>

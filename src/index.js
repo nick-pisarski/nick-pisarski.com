@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './store.js'
 import { Provider } from 'react-redux'
-import { BrowserRouter  as Router} from 'react-router-dom';
+import {BrowserRouter as Router, Route } from "react-router-dom";
+
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import App from './App';
@@ -14,11 +15,11 @@ Axios.defaults.headers['Content-Type'] = 'application/json';
 
 
 const app = (
-    <Router>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </Router>
+    <Provider store={store}>
+        <Router>
+            <Route path="/" component={App}/>
+        </Router>
+    </Provider>
 );
 
 ReactDOM.render(app, document.getElementById('root'));
