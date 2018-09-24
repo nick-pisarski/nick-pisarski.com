@@ -1,0 +1,11 @@
+{
+    "apps": [
+        {
+            "name": "MPG Tracker",
+            "description": "App to display the gas mileage of my car",
+            "link_url": "/apps/gasmpg",
+            "link_text": "Checkout the cool graphes it makes."                  
+        }
+    ]
+
+}
