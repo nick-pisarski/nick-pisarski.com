@@ -1,4 +1,4 @@
-import headerReducer from './Header/ducks';
+import appReducer from './App/ducks';
 export default {
-    header: headerReducer
+    app: appReducer
 }

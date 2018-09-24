@@ -1,5 +1,6 @@
 // Actions
-const LOGIN   = 'containers/Header/LOGIN';
+const LOGIN   = 'containers/App/LOGIN';
+const LOGOUT  = 'containers/App/LOGOUT';
 
 const initialState ={
     user: null,
@@ -14,6 +15,10 @@ export default function reducer(state = initialState, action = {}) {
             user: action.user,
             isUserLoggedIn: true
         }
+    case LOGOUT:
+        return {
+            ...initialState
+        }
     default: return state;
   }
 }
@@ -25,3 +30,9 @@ export function loginUser(user) {
         user
     };
 }
+
+export function logoutUser() {
+    return { 
+          type: LOGOUT
+      };
+  }

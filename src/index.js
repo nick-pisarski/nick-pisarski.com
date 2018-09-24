@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Route } from "react-router-dom";
 
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-import App from './App';
+import App from './containers/App/App.js';
 import Axios from 'axios';
 
 Axios.defaults.baseURL = 'https://8x4k8f8o93.execute-api.us-east-1.amazonaws.com/dev';
