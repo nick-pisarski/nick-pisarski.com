@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Page} from './../../../Shared/UI/UI';
+import {Page} from '@shared/ui/index';
 
 class ProjectPage extends Component{
     

@@ -30,17 +30,17 @@
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
     "raf": "3.4.0",
-    "react": "^16.4.1",
-    "react-bootstrap": "^0.32.1",
+    "react": "^16.5.2",
+    "react-bootstrap": "^0.32.4",
     "react-dev-utils": "^5.0.2",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-bootstrap": "^0.24.4",
@@ -57,8 +57,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
-    "aws-sdk": "^2.281.1",
-    "mime-types": "^2.1.19"
+    "aws-sdk": "^2.320.0",
+    "mime-types": "^2.1.20"
   },
   "scripts": {
     "deploy": "node scripts/build.js && node ./scripts/deploy.js",

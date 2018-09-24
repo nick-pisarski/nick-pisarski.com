@@ -3,6 +3,7 @@ const LOGIN   = 'containers/Header/LOGIN';
 
 const initialState ={
     user: null,
+    isUserLoggedIn: false
 }
 
 // Reducer
@@ -10,7 +11,8 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOGIN:
         return {
-            user: action.user
+            user: action.user,
+            isUserLoggedIn: true
         }
     default: return state;
   }

@@ -10,13 +10,26 @@ import "./Header.css"
 
 
 class Header extends Component{
-    componentDidMount(){
-        console.log('here')
-        this.props.login({
-            name: 'johnFrank'
-        })
-    }
+    // componentDidMount(){
+    //     this.props.login({
+    //         name: 'johnFrank'
+    //     })
+    // }
 
+    _renderLogin = () => {
+        if(!this.props.isUserLoggedIn){
+            return (
+            <LinkContainer to="/" onClick={() =>{ this.props.login({name: 'johnFrank'} )}}>
+                <NavItem>login</NavItem>
+            </LinkContainer>
+            );
+        };
+        return (
+            <NavDropdown eventKey={1} title={this.props.user.name} id="user-details">
+                <LinkContainer to="/settings"><MenuItem eventKey={1}>Settings</MenuItem></LinkContainer>
+            </NavDropdown>
+        )
+    }
     render(){
         return (
             <Navbar inverse collapseOnSelect>
@@ -41,9 +54,7 @@ class Header extends Component{
                     </Nav>
 
                     <Nav pullRight>
-                        <NavDropdown eventKey={1} title={this.props.user.name} id="user-details">
-                            <LinkContainer to="/settings"><MenuItem eventKey={1}>Settings</MenuItem></LinkContainer>
-                        </NavDropdown>
+                        {this._renderLogin()}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -54,7 +65,8 @@ class Header extends Component{
 
 const mapStateToProps = state => {
     return {
-        user: state.header.user
+        user: state.header.user,
+        isUserLoggedIn: state.header.isUserLoggedIn
     };
 }
 

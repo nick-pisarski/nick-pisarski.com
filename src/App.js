@@ -12,7 +12,7 @@ import GasMPG from '@containers/MPGTracker/MPGTracker';
 
 import SettingsPage from '@components/pages/Settings/SettingsPage';
 
-import 'App.css';
+import './App.css';
 
 class App extends Component {
   render() {
@@ -35,4 +35,16 @@ class App extends Component {
   }
 }
 
-export default connect(App);
+const mapStateToProps = state => {
+  return {
+      
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
