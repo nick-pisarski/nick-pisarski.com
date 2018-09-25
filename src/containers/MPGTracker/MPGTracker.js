@@ -12,43 +12,42 @@ import moment from 'moment';
 import "./MPGTracker.css";
 
 class GasMPG extends Component{
-    state = {
-        data: [],
-        dataURL: '/mpgs',
-        loading: true,
-        error: null
+    state ={
+        loaded: false,
     }
-
+    
     componentDidMount() {
-        this.props.loadList();
-        if(this.state.data.length === 0 && this.state.loading){
-            Axios.get(this.state.dataURL)
+        if(!this.state.loaded){
+                      
+            Axios.get('/mpg')
             .then(res => {
                 res.data.forEach(element => {
                     element.created = moment(element.created).format("MM/DD/YYYY")
                 });
-                this.setState({data: res.data, loading: false});
+                console.log(res.data)
+
+                this.setState({loaded: true})
             })
-            .catch(err => {console.log(err); this.setState({error: err})})
+            .catch(err => console.log(err));                      
         }
     }
     
     render(){
-        console.log(this.props)
-        const {data} = this.state;
-        if(this.state.loading){
+        const {props} = this
+        console.log(props);
+        if(props.loading || props.data.length === 0){
             return <div className="GasMPG"><LoadingIcon /></div>;
         }
         return (
             <div className="GasMPG">
                 <Section>
                     <SectionContent className='chart'>
-                        <Chart data={data} y_prop="miles_per_gallon" />
+                        <Chart data={props.data} y_prop="miles_per_gallon" />
                     </SectionContent>
                 </Section>
                 <Section>
                     <SectionContent className='data'>
-                        <DataTable data={data}/>                    
+                        <DataTable data={props.data}/>                    
                     </SectionContent>
                 </Section>
             </div>
@@ -58,7 +57,7 @@ class GasMPG extends Component{
 
 const mapStateToProps = state => {
     return {
-        list: state.mpgTracker.mpgList
+        ...state.mpgTracker
     }
   }
   
