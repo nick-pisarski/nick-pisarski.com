@@ -62,7 +62,7 @@ export function loadMPGList() {
           res.data.forEach(element => {
               element.created = moment(element.created).format("MM/DD/YYYY")
           });
-          dispatch(createAction(LOAD_START, {data: res.data}))
+          dispatch(createAction(LOAD_SUCCESS, {data: res.data}))
       })
       .catch(err => dispatch(createAction(LOAD_FAIL, {error: err})));
   }

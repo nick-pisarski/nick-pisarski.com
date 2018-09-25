@@ -22,20 +22,16 @@ class GasMPG extends Component{
 
     render(){
         const {props} = this
-
         if(props.hasError){
             return <div className="GasMPG"><div>{props.error}</div></div>;
         }
 
-        if(props.loading){
-            return <div className="GasMPG"><LoadingIcon /></div>;
-        }
-
         return (
             <div className="GasMPG">
+                {props.loading ? <LoadingIcon />: null}
                 <Section>
                     <SectionContent className='chart'>
-                        {/* <Chart data={props.data} y_prop="miles_per_gallon" /> */}
+                        <Chart data={props.data} y_prop="miles_per_gallon" />
                     </SectionContent>
                 </Section>
                 <Section>
