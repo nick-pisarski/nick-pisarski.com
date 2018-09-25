@@ -4,45 +4,38 @@ import {Section, SectionContent, LoadingIcon} from '@shared/ui/index';
 import Chart from './Chart/Chart';
 import DataTable from './DataTable/DataTable';
 
-import { loadMPGList } from "./ducks";
-
-import Axios from 'axios';
-import moment from 'moment';
+import { loadMPGList, resetLoadAttempts } from "./ducks";
 
 import "./MPGTracker.css";
 
 class GasMPG extends Component{
-    state ={
-        loaded: false,
-    }
-    
+       
     componentDidMount() {
-        if(!this.state.loaded){
-                      
-            Axios.get('/mpg')
-            .then(res => {
-                res.data.forEach(element => {
-                    element.created = moment(element.created).format("MM/DD/YYYY")
-                });
-                console.log(res.data)
-
-                this.setState({loaded: true})
-            })
-            .catch(err => console.log(err));                      
+        if(this.props.loadAttempts < 1){
+            this.props.loadList();
         }
     }
     
+    componentWillUnmount() {
+        this.props.resetLoadAttempts();
+    }
+
     render(){
         const {props} = this
-        console.log(props);
-        if(props.loading || props.data.length === 0){
+
+        if(props.hasError){
+            return <div className="GasMPG"><div>{props.error}</div></div>;
+        }
+
+        if(props.loading){
             return <div className="GasMPG"><LoadingIcon /></div>;
         }
+
         return (
             <div className="GasMPG">
                 <Section>
                     <SectionContent className='chart'>
-                        <Chart data={props.data} y_prop="miles_per_gallon" />
+                        {/* <Chart data={props.data} y_prop="miles_per_gallon" /> */}
                     </SectionContent>
                 </Section>
                 <Section>
@@ -63,7 +56,8 @@ const mapStateToProps = state => {
   
   const mapDispatchToProps = dispatch => {
     return {
-        loadList: () => dispatch(loadMPGList())
+        loadList: () => dispatch(loadMPGList()),
+        resetLoadAttempts: () => dispatch(resetLoadAttempts())
     };
   }
 
