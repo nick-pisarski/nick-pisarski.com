@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Route, Switch} from "react-router-dom";
 import HomePage from '@components/pages/HomePage/HomePage';
 import AppsPage from '@components/pages/Apps/AppsPage';
-import GasMPG from '@containers/MPGTracker/MPGTracker';
+import GasMPG   from '@containers/MPGTracker/MPGTracker';
 
 import {loginUser, logoutUser} from './ducks';
 

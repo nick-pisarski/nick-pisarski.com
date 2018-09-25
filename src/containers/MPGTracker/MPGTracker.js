@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import {Section, SectionContent, LoadingIcon} from '@shared/ui/index';
 import Chart from './Chart/Chart';
 import DataTable from './DataTable/DataTable';
+
+import { loadMPGList } from "./ducks";
 
 import Axios from 'axios';
 import moment from 'moment';
@@ -17,6 +20,7 @@ class GasMPG extends Component{
     }
 
     componentDidMount() {
+        this.props.loadList();
         if(this.state.data.length === 0 && this.state.loading){
             Axios.get(this.state.dataURL)
             .then(res => {
@@ -30,6 +34,7 @@ class GasMPG extends Component{
     }
     
     render(){
+        console.log(this.props)
         const {data} = this.state;
         if(this.state.loading){
             return <div className="GasMPG"><LoadingIcon /></div>;
@@ -51,4 +56,16 @@ class GasMPG extends Component{
     }
 }
 
-export default GasMPG;
+const mapStateToProps = state => {
+    return {
+        list: state.mpgTracker.mpgList
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        loadList: () => dispatch(loadMPGList())
+    };
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(GasMPG);

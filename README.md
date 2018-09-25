@@ -3,6 +3,7 @@
 #####  Site to od:
 
 - [x] Implement Redux ***IMPORTANT!***
+    - [ ] Need to understand middle where, to do successful calls, failures, etc
 - [ ] Work the design, needs something cleaner
 - [ ] Add authentication
     * Lock api and site to my ip address or computer in the mean time????
