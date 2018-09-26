@@ -13,6 +13,12 @@ const initialState = {
   hasError: null,
   error: null,
   data: [],
+  car: {
+    manufacturer:"Volkswagen",
+    manufacturerCode:"VW",
+    model: 'Passat',
+    year: 2015
+  }
 };
 
 // Reducer

@@ -1,60 +1,9 @@
 import React, { Component } from 'react';
 import {VictoryLine, VictoryChart, VictoryAxis, VictoryLabel,   VictoryLegend, VictoryTheme}from 'victory';
+import {getCalculations} from '../utilities';
+
+
 import "./Chart.css"
-
-//used to add a little padding at the top of the y-axis
-const domain_offset = 5;
-const formatData = (data, y_prop) => {
-    return data.map((item, iter) => {
-        return{
-            x: item['created'],
-            y: item[y_prop]
-        };
-    });
-}
-
-
-const getAverage = (data) => {
-    const sum = data.reduce((sum, next, iter) => {
-        return sum += next.y;
-    }, 0);
-    return Math.round(sum / data.length);
-}
-
-const getAverageData = (data, avg) => {
-    return data.map(item => {
-        return {x: item.x, y: avg}
-    })
-}
-
-const getMax = (data)=> data.map(item => item.y).reduce((max, curr) => Math.max(max, curr));
-const getMin = (data)=> data.map(item => item.y).reduce((min, curr) => Math.min(min, curr));
-
-const getDomain = (data, property, min = 0) => [min, getMax(data)+domain_offset];
-
-const getCalculations = (original_data, y_prop) => {
-    if(original_data.length === 0 ){
-        return {
-            data: [],
-            avg_value: 0,
-            avg_data: [],
-            y_domain: [0,1],
-            max_value: 0,
-            min_value: 0
-        };
-    }
-
-    const data = formatData(original_data, y_prop);
-    const avg_value = getAverage(data);
-    return {
-        data: formatData(original_data, y_prop),
-        avg_value: getAverage(data),
-        avg_data: getAverageData(data, avg_value),
-        y_domain: getDomain(data),
-        max_value: getMax(data),
-        min_value: getMin(data)
-    };
-}
 
 class Chart extends Component{
 
@@ -92,7 +41,7 @@ class Chart extends Component{
                     style={{ border: { stroke: "black" }, title: {fontSize: 20 } }}
                     gutter={20}
                     data={[
-                        { name: "Car_Name", symbol: { fill: data_color,} },
+                        { name: `${this.props.car.manufacturerCode} ${this.props.car.model}`, symbol: { fill: data_color,} },
                         { name: "Avg", symbol: { fill: avg_color} },
                         ]}
                     />
@@ -108,7 +57,7 @@ class Chart extends Component{
                         standalone={false}
                         />            
                     <VictoryAxis 
-                        tickFormat={y => y.toFixed(2)} 
+                        tickFormat={y => y.toFixed(0)} 
                         label='Miles Per Gallon'
                         axisLabelComponent={
                             <VictoryLabel dy={-30}/>
@@ -145,7 +94,8 @@ class Chart extends Component{
                             return is_middle ? `AVG: ${val.y}` : null;
                         }}
                         />
-                </VictoryChart>              
+                </VictoryChart>      
+               
               
             </div>
         );

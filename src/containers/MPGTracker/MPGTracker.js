@@ -31,7 +31,7 @@ class GasMPG extends Component{
                 {props.loading ? <LoadingIcon />: null}
                 <Section>
                     <SectionContent className='chart'>
-                        <Chart data={props.data} y_prop="miles_per_gallon" />
+                        <Chart data={props.data} car={props.car} y_prop="miles_per_gallon" />
                     </SectionContent>
                 </Section>
                 <Section>
