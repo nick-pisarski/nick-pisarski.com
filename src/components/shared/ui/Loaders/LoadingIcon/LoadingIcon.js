@@ -1,6 +1,15 @@
 import React from 'react';
+
+import BackDrop from '@shared/ui/BackDrop/BackDrop';
 import './LoadingIcon.css';
 
-const loadingIcon  = () => <div className="LoadingIconContainer"><div className="LoadingIcon"><div></div><div></div></div> </div>;
+const loadingIcon = () => {
+return (
+    <BackDrop>
+        <div className="LoadingIcon">
+            <div></div><div></div>
+        </div>
+    </BackDrop>
+)};
 
 export default loadingIcon
