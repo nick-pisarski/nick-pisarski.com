@@ -28,7 +28,7 @@ class GasMPG extends Component{
 
         return (
             <div className="GasMPG">
-                {props.loading ? <LoadingIcon />: null}
+                {props.loading ? <LoadingIcon /> : null}
                 <Section>
                     <SectionContent className='chart'>
                         <Chart data={props.data} car={props.car} y_prop="miles_per_gallon" />
@@ -36,7 +36,7 @@ class GasMPG extends Component{
                 </Section>
                 <Section>
                     <SectionContent className='data'>
-                        <MPGTable data={props.data}/>                
+                        <MPGTable data={props.data} loading={props.loading}/>                
                     </SectionContent>
                 </Section>
             </div>
