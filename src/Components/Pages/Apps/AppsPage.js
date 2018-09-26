@@ -12,7 +12,9 @@ class AppsPage extends Component{
             <Section title={app.name} key={key}>
                 <SectionContent>
                     {app.description}
-                    <LinkContainer to={app.link_url}><div>{app.link_text || "Check it out"}</div></LinkContainer>
+                    <LinkContainer to={app.link_url} style={{color: '#009999'}}>
+                        <div >{app.link_text || "Check it out"}</div>
+                    </LinkContainer>
                 </SectionContent>
             </Section>
         )
