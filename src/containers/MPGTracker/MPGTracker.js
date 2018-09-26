@@ -1,49 +1,42 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import {Section, SectionContent, LoadingIcon} from '@shared/ui/index';
 import Chart from './Chart/Chart';
 import DataTable from './DataTable/DataTable';
 
-import Axios from 'axios';
-import moment from 'moment';
+import { loadMPGList, resetLoadAttempts } from "./ducks";
 
 import "./MPGTracker.css";
 
 class GasMPG extends Component{
-    state = {
-        data: [],
-        dataURL: '/mpgs',
-        loading: true,
-        error: null
-    }
-
+       
     componentDidMount() {
-        if(this.state.data.length === 0 && this.state.loading){
-            Axios.get(this.state.dataURL)
-            .then(res => {
-                res.data.forEach(element => {
-                    element.created = moment(element.created).format("MM/DD/YYYY")
-                });
-                this.setState({data: res.data, loading: false});
-            })
-            .catch(err => {console.log(err); this.setState({error: err})})
+        if(this.props.loadAttempts < 1){
+            this.props.loadList();
         }
     }
     
+    componentWillUnmount() {
+        this.props.resetLoadAttempts();
+    }
+
     render(){
-        const {data} = this.state;
-        if(this.state.loading){
-            return <div className="GasMPG"><LoadingIcon /></div>;
+        const {props} = this
+        if(props.hasError){
+            return <div className="GasMPG"><div>{props.error}</div></div>;
         }
+
         return (
             <div className="GasMPG">
+                {props.loading ? <LoadingIcon />: null}
                 <Section>
                     <SectionContent className='chart'>
-                        <Chart data={data} y_prop="miles_per_gallon" />
+                        <Chart data={props.data} car={props.car} y_prop="miles_per_gallon" />
                     </SectionContent>
                 </Section>
                 <Section>
                     <SectionContent className='data'>
-                        <DataTable data={data}/>                    
+                        <DataTable data={props.data}/>                    
                     </SectionContent>
                 </Section>
             </div>
@@ -51,4 +44,17 @@ class GasMPG extends Component{
     }
 }
 
-export default GasMPG;
+const mapStateToProps = state => {
+    return {
+        ...state.mpgTracker
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        loadList: () => dispatch(loadMPGList()),
+        resetLoadAttempts: () => dispatch(resetLoadAttempts())
+    };
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(GasMPG);

@@ -1,54 +1,9 @@
 import React, { Component } from 'react';
-import _ from 'lodash'
-import {VictoryLine, VictoryChart, VictoryAxis, VictoryLabel,   VictoryLegend, VictoryTheme, VictoryBrushContainer, VictoryZoomContainer }from 'victory';
+import {VictoryLine, VictoryChart, VictoryAxis, VictoryLabel,   VictoryLegend, VictoryTheme}from 'victory';
+import {getCalculations} from '../utilities';
+
+
 import "./Chart.css"
-
-//used to add a little padding at the top of the y-axis
-const domain_offset = 5;
-const formatData = (data, y_prop) => {
-    return data.map((item, iter) => {
-        return{
-            x: item['created'],
-            y: item[y_prop]
-        };
-    });
-}
-
-
-const getAverage = (data) => {
-    const sum = data.reduce((sum, next, iter) => {
-        return sum += next.y;
-    }, 0);
-    return Math.round(sum / data.length);
-}
-
-const getAverageData = (data, avg) => {
-    return data.map(item => {
-        return {x: item.x, y: avg}
-    })
-}
-
-const getMax = (data)=> data.map(item => item.y).reduce((max, curr) => Math.max(max, curr));
-const getMin = (data)=> data.map(item => item.y).reduce((min, curr) => Math.min(min, curr));
-
-const getDomain = (data, property, min = 0) => [min, getMax(data)+domain_offset];
-
-const getCalculations = (original_data, y_prop) => {
-    const data = formatData(original_data, y_prop);
-    const avg_value = getAverage(data);
-    const avg_data=  getAverageData(data, avg_value);
-    const y_domain = getDomain(data);
-    const max_value = getMax(data);
-    const min_value = getMin(data);
-    return {
-        data,
-        avg_value,
-        avg_data,
-        y_domain,
-        max_value,
-        min_value
-    };
-}
 
 class Chart extends Component{
 
@@ -68,12 +23,7 @@ class Chart extends Component{
         if(JSON.stringify(props.data) === JSON.stringify(state.data)) return null;
         const calculatedStateValues = getCalculations(props.data, props.y_prop);
         return calculatedStateValues;
-    }      
-    // need to do something here so that the data being graphed is what is being displayed and all the statistics
-    // get udpated as the zoom changes
-    handleZoom = (domain) => this.setState({selectedDomain: domain});
-    
-    handleBrush= (domain) => this.setState({zoomDomain: domain});
+    }
 
     render(){
         const {data, avg_data, y_domain, avg_color, data_color, width, height, min_value, max_value} = this.state;
@@ -84,13 +34,6 @@ class Chart extends Component{
                     theme={VictoryTheme.material}
                     width={width}
                     height={height}
-                    containerComponent={
-                        <VictoryZoomContainer responsive={false}
-                          zoomDimension="x"
-                          zoomDomain={this.state.zoomDomain}
-                          onZoomDomainChange={this.handleZoom.bind(this)}
-                        />
-                      }
                     >      
                 <VictoryLabel text="MPG over Time" x={width/2-50} y={50}/>
                 <VictoryLegend x={width - 200} y={height-100}
@@ -98,7 +41,7 @@ class Chart extends Component{
                     style={{ border: { stroke: "black" }, title: {fontSize: 20 } }}
                     gutter={20}
                     data={[
-                        { name: "Car_Name", symbol: { fill: data_color,} },
+                        { name: `${this.props.car.manufacturerCode} ${this.props.car.model}`, symbol: { fill: data_color,} },
                         { name: "Avg", symbol: { fill: avg_color} },
                         ]}
                     />
@@ -114,7 +57,7 @@ class Chart extends Component{
                         standalone={false}
                         />            
                     <VictoryAxis 
-                        tickFormat={y => y.toFixed(2)} 
+                        tickFormat={y => y.toFixed(0)} 
                         label='Miles Per Gallon'
                         axisLabelComponent={
                             <VictoryLabel dy={-30}/>
@@ -147,43 +90,13 @@ class Chart extends Component{
                             labels: {fill: avg_color, symbol: 'star'}
                         }}
                         labels={val => {
-                            const is_middle = data[mid_point].x.toString() === val.x.toString();
+                            const is_middle = data && data.length > 0 ? data[mid_point].x.toString() === val.x.toString() : null;
                             return is_middle ? `AVG: ${val.y}` : null;
                         }}
                         />
-                </VictoryChart>
-                
-                <VictoryChart scale={{ x: "time" }} domain={{y: y_domain}}
-                    theme={VictoryTheme.material}
-                    width={width/3}
-                    height={height/2}
-                    containerComponent={
-                        <VictoryBrushContainer 
-                            responsive={false}
-                            brushDimension="x"
-                            brushDomain={this.state.selectedDomain}
-                            onBrushDomainChange={this.handleBrush.bind(this)}
-                        />
-                      }
-                        >        
-                    <VictoryAxis 
-                        tickFormat={x => new Date(x).getFullYear()}
-                        tickCount={_.uniq(data.map(val => new Date(val.x).getFullYear())).length}
-                        crossAxis
-                        />                                  
-                    
-                    <VictoryLine
-                        data={data}
-                        style={{
-                            data: { stroke: data_color},
-                        }}
-                        interpolation="natural"
-                        animate={{
-                            duration: 2000,
-                            onLoad: { duration: 1000 }
-                        }}
-                        />
-                </VictoryChart>
+                </VictoryChart>      
+               
+              
             </div>
         );
     }

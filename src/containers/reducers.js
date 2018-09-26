@@ -1,4 +1,6 @@
 import appReducer from './App/ducks';
+import mpgTrackerReducer from './MPGTracker/ducks';
 export default {
-    app: appReducer
+    app: appReducer,
+    mpgTracker: mpgTrackerReducer
 }
