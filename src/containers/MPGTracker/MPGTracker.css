@@ -5,7 +5,7 @@
 }
 
 .GasMPG .chart{
-    height: 400px;
+    height: 50%;
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -24,7 +24,7 @@
 }
 
 .GasMPG .data{
-    height: 400px;
+    height: 50%;
     width: 100%;
     background-color: beige;
 }

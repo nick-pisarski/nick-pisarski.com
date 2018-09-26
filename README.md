@@ -14,6 +14,7 @@
         * can store in s3 bucket as JSON obj
     - [ ] user authentication
         * use sign in with google or facebook
+- [ ] Add in some sort of messaging system
   
 ##### MPG Tracker To do:
 - [ ] Input form
@@ -23,3 +24,5 @@
     - [ ] creat stats api
     - [ ] add car to mpg tracker to allow multiple cars
 - [ ] Make and attempt to be mobile friendly 
+- [x] Import Table Library
+    - [ ] Change Style for table library

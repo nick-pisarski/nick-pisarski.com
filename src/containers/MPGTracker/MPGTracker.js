@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Section, SectionContent, LoadingIcon} from '@shared/ui/index';
 import Chart from './Chart/Chart';
-import DataTable from './DataTable/DataTable';
+import MPGTable from './MPGTable/MPGTable';
 
 import { loadMPGList, resetLoadAttempts } from "./ducks";
 
@@ -28,7 +28,7 @@ class GasMPG extends Component{
 
         return (
             <div className="GasMPG">
-                {props.loading ? <LoadingIcon />: null}
+                {props.loading ? <LoadingIcon /> : null}
                 <Section>
                     <SectionContent className='chart'>
                         <Chart data={props.data} car={props.car} y_prop="miles_per_gallon" />
@@ -36,7 +36,7 @@ class GasMPG extends Component{
                 </Section>
                 <Section>
                     <SectionContent className='data'>
-                        <DataTable data={props.data}/>                    
+                        <MPGTable data={props.data} loading={props.loading}/>                
                     </SectionContent>
                 </Section>
             </div>
