@@ -39,7 +39,7 @@ class GasMPG extends Component{
         return (
             <div className="MPGTracker">
                 {props.loading ? <LoadingIcon /> : null}
-                {!props.loading && props.showAddForm ? <MPGEntryForm onFormSubmitted={this.onAddFormSubmitted}/>: null}
+                {/* {!props.loading && props.showAddForm ? <MPGEntryForm onFormSubmitted={this.onAddFormSubmitted}/>: null} */}
                 <Section title="Data" showContent={true}>
                     <SectionContent  className='data'>
                         <div id="addNewMPG" className="add-mpg-container">
