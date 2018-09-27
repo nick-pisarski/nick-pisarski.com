@@ -1,11 +1,16 @@
 .GasMPG{
-    /* background-color: red; */
     height: 100%;
-    width: 100%;
+    width: 80%;
+    position: relative;
+}
+
+@media( max-width: 767px){
+    .GasMPG{
+        width: 100%;
+    }
 }
 
 .GasMPG .chart{
-    height: 50%;
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -13,18 +18,7 @@
     background-color: beige;
 }
 
-.GasMPG .stats{
-    height: 100%;
-    width: 75%;
-    background-color: darkcyan;
-}
-
-.GasMPG .stats-container{
-    width: 100%;
-}
-
 .GasMPG .data{
-    height: 50%;
     width: 100%;
     background-color: beige;
 }

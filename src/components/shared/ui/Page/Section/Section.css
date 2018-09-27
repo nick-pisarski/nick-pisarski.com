@@ -1,8 +1,7 @@
 .Section{
     background-color: rgba(192, 192, 192, 0.1);
-    padding: 8px;
-    margin: 16px 0px;
-    /* border-radius: 4px; */
+    padding: 2%;
+    margin: 3% 1%;
     box-sizing: border-box;
 }
 .Section .content{

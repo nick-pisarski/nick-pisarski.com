@@ -41,6 +41,7 @@ export default  props => {
       data={props.data} 
       loading={props.loading} 
       columns={columns}
-      defaultPageSize={5}
+      defaultPageSize={10}
+      showPageSizeOptions={false}
        />
   )};
