@@ -77,6 +77,11 @@ export default class EntryForm extends Component {
     handleSubmit = evt => {
         const isValid = this.validate();
         if(isValid)
+            // this comes from the props passed in from the MPG Tracker
+            this.props.onFormSubmitted();
+
+            // handle form state stuff here
+            
             console.log(isValid, this.state.form);
     }    
 

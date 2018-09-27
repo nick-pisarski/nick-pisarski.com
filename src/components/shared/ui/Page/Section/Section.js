@@ -42,7 +42,7 @@ class Section extends Component{
         return (
             <div className={this._getClassName()}>
                 <div className="title_container">
-                    <h3 className='title' title={this.props.title}>{this.props.title}</h3>
+                    <h4 className='title' title={this.props.title}>{this.props.title}</h4>
                     {this._getToggleButton()}
                 </div>
                 {this._getContent()}

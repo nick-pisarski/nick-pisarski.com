@@ -12,7 +12,7 @@ const dollar = props => {
         val = `-${val}`
     }
     
-    return <div style={styles} className="Dollar">{val}</div>;
+    return <div style={styles} className="Dollar" {...props}>{val}</div>;
 }
 
 export default dollar;

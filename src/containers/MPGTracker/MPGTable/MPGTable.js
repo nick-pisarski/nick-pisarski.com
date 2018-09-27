@@ -8,24 +8,25 @@ import { Dollar, Decimal } from "@shared/ui/Masks/index";
 const columns = [{
             Header: 'Date',
             accessor: 'created',
-            maxWidth: 95
+            maxWidth: 95,
+            Cell: props => props.value.format("MM/DD/YY")
           },{
-            Header: 'Miles',
-            accessor: 'miles',
-            Cell: props => <Decimal value={props.value} places={1}/>,
-            maxWidth: 86
-          },{
-            Header: 'Miles Per Gallon',
             accessor: 'miles_per_gallon',
+            Header: props => <span title='Miles Per Gallon'>MPG</span>,
             Cell: props => <Decimal value={props.value}/>,
             maxWidth: 125
           },{
-            Header: 'Cost Per Gallon',
+            Header: 'Miles',
+            accessor: 'miles',
+            Cell: props => <Decimal value={props.value} places={1} title={props.value}/>,
+            maxWidth: 86
+          },{
+            Header: props => <span title='Cost Per Gallon'>CPG</span>,
             accessor: 'cost_per_gallon',
             Cell: props => <Dollar value={props.value} />,
             maxWidth: 125
           },{
-            Header: 'Cost',
+            Header: props => <span title='Total Cost'>Total</span>,
             accessor: 'total',
             Cell: props => <Dollar value={props.value} />,
             maxWidth: 86
@@ -38,9 +39,7 @@ const columns = [{
 export default  props => {
   return (
     <ReactTable 
-      data={props.data} 
-      loading={props.loading} 
+      {...props}
       columns={columns}
-      defaultPageSize={5}
        />
   )};

@@ -1,8 +1,7 @@
 .Section{
     background-color: rgba(192, 192, 192, 0.1);
-    padding: 8px;
-    margin: 16px 0px;
-    /* border-radius: 4px; */
+    padding: 2%;
+    margin: 3% 1%;
     box-sizing: border-box;
 }
 .Section .content{
@@ -12,14 +11,14 @@
     flex-flow: column nowrap;
     box-sizing: border-box;
 }
-.Section .title_container{
+.Section > .title_container{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.Section .title_container > h3.title {
-    margin: 8px 4px;
-    color: #99FFFF;
+.Section > .title_container > .title {
+    margin: 2px 0;
+    color: #009999;
 }
 
 .Section .title_container > .toggle:hover {
