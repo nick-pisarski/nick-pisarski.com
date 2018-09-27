@@ -91,6 +91,7 @@ module.exports = {
       "@components": path.resolve(__dirname, "../src/components"),
       "@containers": path.resolve(__dirname, "../src/containers/"),
       "@shared": path.resolve(__dirname, "../src/components/shared"),
+      "@store": path.resolve(__dirname, "../src/store"),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).

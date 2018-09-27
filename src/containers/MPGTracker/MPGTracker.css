@@ -1,24 +1,31 @@
-.GasMPG{
+.MPGTracker{
     height: 100%;
     width: 80%;
     position: relative;
 }
 
 @media( max-width: 767px){
-    .GasMPG{
+    .MPGTracker{
         width: 100%;
     }
 }
 
-.GasMPG .chart{
+.MPGTracker .chart{
     width: 100%;
+    padding: 2% 3%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     background-color: beige;
 }
 
-.GasMPG .data{
+.MPGTracker .data{
     width: 100%;
     background-color: beige;
+}
+
+.MPGTracker .data .add-mpg {
+    background-color: brown;
+    height: 40px;
+    width: 100%;
 }
