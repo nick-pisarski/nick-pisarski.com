@@ -1,5 +1,8 @@
 import Axios from 'axios';
 import moment from 'moment';
+import { combineReducers } from 'redux'
+
+import EntryFormReducer from './MGPEntryForm/ducks';
 import {createAction} from '@store/actions';
 
 // Actions
@@ -25,7 +28,7 @@ const initialState = {
 };
 
 // Reducer
-export default function reducer(state = initialState, action = {}) {
+function MainReducer(state = initialState, action = {}) {
   const attempts = state.loadAttempts + 1;
   switch (action.type) {
     // do reducer stuff
@@ -64,9 +67,20 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+export default combineReducers({
+  main: MainReducer,
+  form: EntryFormReducer
+});
+
+
+
+//Actions
+
 const DATA_URL = '/mpgs';
 
-// Action Creators
+/**
+ * Action to load list of MPG *
+ */
 export function loadMPGList() {
   return (dispatch, getState) => {
     dispatch({ type: LOAD_START });
@@ -80,13 +94,23 @@ export function loadMPGList() {
   }
 }
 
+/**
+ * Action to reset the load attempts of the page to zero * 
+ * @return {Object}
+ */
 export function resetLoadAttempts(){
   return createAction(RESET_LOAD_ATTEMPTS)
 }
 
-export function toggleAddForm(){
+/**
+ * Action to toggle Show state of Add MPG Form * 
+ * @param {boolean=} showForm optional* set the show state
+ */
+
+export function toggleAddForm(showForm){
   return (dispatch, getState) => {
-    const state = getState().mpgTracker;
-    return dispatch(createAction(TOGGLE_ADD_FORM, {showAddForm: !state.showAddForm} ))
+    const state = getState().mpgTracker.main;
+    const showAddForm = showForm ? showForm : !state.showAddForm
+    return dispatch(createAction(TOGGLE_ADD_FORM, {showAddForm} ))
   }
 }

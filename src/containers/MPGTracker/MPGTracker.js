@@ -22,8 +22,12 @@ class GasMPG extends Component{
         this.props.resetLoadAttempts();
     }
 
-    onAddClick = () => {
-        this.props.toggleForm()
+    handleFormShow = () => {
+        this.props.toggleForm(true);
+    }
+
+    handleFormHide = () => {
+        this.props.toggleForm(false);
     }
 
     onAddFormSubmitted = () => {
@@ -39,11 +43,11 @@ class GasMPG extends Component{
         return (
             <div className="MPGTracker">
                 {props.loading ? <LoadingIcon /> : null}
-                {/* {!props.loading && props.showAddForm ? <MPGEntryForm onFormSubmitted={this.onAddFormSubmitted}/>: null} */}
+                <MPGEntryForm show={props.showAddForm && !props.loading} handleHide={this.handleFormHide} onFormSubmitted={this.onAddFormSubmitted}/>
                 <Section title="Data" showContent={true}>
                     <SectionContent  className='data'>
                         <div id="addNewMPG" className="add-mpg-container">
-                            <Button label="Add +" onClick={this.onAddClick}/>
+                            <Button label="Add +" onClick={this.handleFormShow}/>
                         </div>
                         <MPGTable 
                             data={props.data} 
@@ -69,7 +73,7 @@ class GasMPG extends Component{
 
 const mapStateToProps = state => {
     return {
-        ...state.mpgTracker
+        ...state.mpgTracker.main
     }
   }
   

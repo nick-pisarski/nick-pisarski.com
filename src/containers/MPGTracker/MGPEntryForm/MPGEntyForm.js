@@ -1,51 +1,36 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import {Form, Button} from 'react-bootstrap';
-import {FieldGroupHorizontal} from './FormComponents'
+import {FieldGroupHorizontal} from './FormComponents';
+import Modal from '@shared/ui/Modal/Modal';
 import _ from 'lodash';
 
+import { validateForm, handleFieldChange, resetForm, submitForm } from "./ducks";
+
+
 import './MPGEntryForm.css';
+//TODO: need to add a bank of errors
 
 const NON_ZERO_ERROR = 'Value must be greater than 0.'
 
-export default class EntryForm extends Component {
-    state = {
-        form: {
-            miles: {
-                value: 0,
-                type: 'number',
-                label: 'Miles Driven',
-                valid: null,
-                error: null,
-            },
-            gallons: {
-                value: 0,
-                type: 'number',
-                label: 'Gallons Used',
-                valid: null,
-                error: null,
-            },
-            total: {
-                value: 0,
-                type: 'number',
-                label: 'Total Cost',
-                valid: null,
-                error: null,
-            },
-            notes: {
-                value: '',
-                type: 'text',
-                label: 'Notes',
-                valid: null,
-                error: null,
-            }
-        },
-        formValidated: false
-    }
+class MPGEntryForm extends Component {
     
-    validate = () => {
-       const form = {...this.state.form};
-       let valid = true;
+    onComponentDidUnMount(){
+        this.props.reset();
+    }
 
+    handleSubmit = evt => {
+        const isValid = this.validate();
+        if(isValid) {
+            // this comes from the props passed in from the MPG Tracker
+            this.props.onFormSubmitted();
+            this.props.submit();
+        }            
+    }  
+
+    validate = () => {
+        const form = {...this.props.form};
+        let valid = true;
         _.forEach(['miles', 'gallons', 'total'], prop => {
             if (parseFloat(form[prop].value) < 1) {
                 form[prop].valid = 'error';
@@ -53,50 +38,24 @@ export default class EntryForm extends Component {
                 valid = false;
             }
         })
-       this.setState({form, formValidated: true});
-       return valid;
+
+        // update the redux state
+        this.props.validate(form, valid);
+        return valid;
     }
     
-    handleChange = (prop, value) => {
-        const form = {...this.state.form}       
-        let {formValidated} = this.state;
-
-        form[prop].value = value;
-        
-        if(formValidated){
-            formValidated = false;
-            _.forEach(form, field => {
-                field.valid = null;
-                field.error = null;
-            })
-        }
-
-        this.setState({form, formValidated});
-    }
-
-    handleSubmit = evt => {
-        const isValid = this.validate();
-        if(isValid)
-            // this comes from the props passed in from the MPG Tracker
-            this.props.onFormSubmitted();
-
-            // handle form state stuff here
-            
-            console.log(isValid, this.state.form);
-    }    
-
-    render(){
-        const {form} = this.state;
-        const fields = _.map(_.keys(form), (prop) => {
+    renderFields = () => {
+        const {form} = this.props;
+        return _.map(_.keys(form), (prop) => {
             const field = form[prop];
             const props = {
                 key: prop,
                 id: prop,
                 type: field.type,
                 label: field.label,
-                onChange: (event)=> {this.handleChange(prop, event.target.value)},
-                value:this.state.form[prop].value,
-                validationState: this.state.form[prop].valid
+                onChange: (event)=> {this.props.handleChange(prop, event.target.value)},
+                value: form[prop].value,
+                validationState: form[prop].valid
             }
             if(field.type === 'text'){
                 props.componentClass = "textarea"
@@ -110,12 +69,37 @@ export default class EntryForm extends Component {
             }
             return (<FieldGroupHorizontal {...props}/>)
         })
+    }
 
+    render(){
         return (
-            <Form horizontal>
-                {fields}
-                <Button onClick={this.handleSubmit}>Submit</Button>
-            </Form>
+            <Modal 
+                title="Add New Entry"
+                show={this.props.show} 
+                handleHide={this.props.handleHide} 
+                footer={<Button onClick={this.handleSubmit}>Submit</Button>}
+                closeButton
+            >
+                <Form horizontal> {this.renderFields()} </Form>
+            </Modal>
+            
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        ...state.mpgTracker.form
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        validate: (form, valid) => dispatch(validateForm(form, valid)),
+        handleChange: (field, value) => dispatch(handleFieldChange(field, value)),
+        reset: () => dispatch(resetForm()),
+        submit: () => dispatch(submitForm())
+    };
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MPGEntryForm);
