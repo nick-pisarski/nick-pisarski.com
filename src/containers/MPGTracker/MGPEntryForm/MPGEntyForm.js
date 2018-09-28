@@ -1,19 +1,19 @@
+// Third Party
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import {Form, Button} from 'react-bootstrap';
-import {FieldGroupHorizontal} from './FormComponents';
-import Modal from '@shared/ui/Modal/Modal';
-
-import { NON_ZERO_ERROR } from '@constants/errors';
-
 import _ from 'lodash';
 
+// Compnonents and Constants
+import {FieldGroupHorizontal} from './FormComponents';
+import Modal from '@shared/ui/Modal/Modal';
+import { NON_ZERO_ERROR } from '@constants/errors';
+
+// Actions
 import { validateForm, handleFieldChange, resetForm, submitForm } from "./ducks";
 
-
+//CSS
 import './MPGEntryForm.css';
-//TODO: need to add a bank of errors
-
 
 class MPGEntryForm extends Component {
     

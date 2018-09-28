@@ -8,4 +8,5 @@ module.exports = {
     "@containers": path.resolve(__dirname, "../src/containers/"),
     "@shared": path.resolve(__dirname, "../src/components/shared"),
     "@store": path.resolve(__dirname, "../src/store"),
+    "@constants": path.resolve(__dirname, "../src/constants"),
   }

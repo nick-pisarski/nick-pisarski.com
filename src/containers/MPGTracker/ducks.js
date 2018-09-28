@@ -1,4 +1,5 @@
 import Axios from 'axios';
+// Third Party
 import moment from 'moment';
 import { combineReducers } from 'redux'
 
@@ -67,15 +68,13 @@ function MainReducer(state = initialState, action = {}) {
   }
 }
 
+// export the reducer and comvine with the form
 export default combineReducers({
   main: MainReducer,
   form: EntryFormReducer
 });
 
-
-
 //Actions
-
 const DATA_URL = '/mpgs';
 
 /**
@@ -96,7 +95,7 @@ export function loadMPGList() {
 
 /**
  * Action to reset the load attempts of the page to zero * 
- * @return {Object}
+ * @return {Object} an action object
  */
 export function resetLoadAttempts(){
   return createAction(RESET_LOAD_ATTEMPTS)
