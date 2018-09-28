@@ -1,5 +1,6 @@
 .Page{
     height: 100%;
+    width: 95%;
     margin: 1% 2%;
     padding: 1%;
     box-sizing: border-box;
@@ -9,6 +10,7 @@
 
 @media(max-width: 767px){
     .Page{
+        width: 100%;
         margin: 0;
     }
     .Page h2.title{
