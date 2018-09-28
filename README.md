@@ -15,14 +15,17 @@
     - [ ] user authentication
         * use sign in with google or facebook
 - [ ] Add in some sort of messaging system
+    *   Should be a global services that apps can take advantage of
+    *   different types of messages: timed/clicked dismissal, error/info/warning stats, etc
   
 ##### MPG Tracker To do:
 - [ ] Input form
-    * currently hidden, need to make into a modal open close by clicking button
+    - [x] make into a modal open close by clicking button
+  
 * Back end work
     - [ ] hook up post method
     - [ ] creat stats api
     - [ ] add car to mpg tracker to allow multiple cars
-- [ ] Make and attempt to be mobile friendly 
+- [x] Make and attempt to be mobile friendly 
 - [x] Import Table Library
     - [ ] Change Style for table library

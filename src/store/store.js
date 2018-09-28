@@ -5,6 +5,6 @@ import ReduxThunk from 'redux-thunk'
 import containerReducers from '../containers/reducers';
 
 // for redux dev tools
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = (process.env.NODE_ENV !== 'production') ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 
 export default createStore(combineReducers(containerReducers), composeEnhancers(applyMiddleware(ReduxThunk)))
