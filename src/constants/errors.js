@@ -1,0 +1,1 @@
+export const NON_ZERO_ERROR = 'Value must be greater than 0.';

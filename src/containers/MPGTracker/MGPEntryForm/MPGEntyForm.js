@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import {Form, Button} from 'react-bootstrap';
 import {FieldGroupHorizontal} from './FormComponents';
 import Modal from '@shared/ui/Modal/Modal';
+
+import { NON_ZERO_ERROR } from '@constants/errors';
+
 import _ from 'lodash';
 
 import { validateForm, handleFieldChange, resetForm, submitForm } from "./ducks";
@@ -11,7 +14,6 @@ import { validateForm, handleFieldChange, resetForm, submitForm } from "./ducks"
 import './MPGEntryForm.css';
 //TODO: need to add a bank of errors
 
-const NON_ZERO_ERROR = 'Value must be greater than 0.'
 
 class MPGEntryForm extends Component {
     
