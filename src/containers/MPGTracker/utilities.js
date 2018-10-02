@@ -10,7 +10,6 @@ export const formatData = (data, y_prop) => {
     });
 }
 
-
 export const getAverage = (data) => {
     const sum = data.reduce((sum, next, iter) => {
         return sum += next.y;

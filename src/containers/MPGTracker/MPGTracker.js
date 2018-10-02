@@ -30,10 +30,6 @@ class GasMPG extends Component{
         this.props.toggleForm(false);
     }
 
-    onAddFormSubmitted = () => {
-        this.props.toggleForm()
-    }
-
     render(){
         const {props} = this
         if(props.hasError){
@@ -43,7 +39,10 @@ class GasMPG extends Component{
         return (
             <div className="MPGTracker">
                 {props.loading ? <LoadingIcon /> : null}
-                <MPGEntryForm show={props.showAddForm && !props.loading} handleHide={this.handleFormHide} onFormSubmitted={this.onAddFormSubmitted}/>
+                <MPGEntryForm 
+                    show={props.showAddForm && !props.loading} 
+                    handleHide={this.handleFormHide} 
+                    onFormSubmitted={() => this.props.toggleForm()}/>
                 <Section title="Data" showContent={true}>
                     <SectionContent  className='data'>
                         <div id="addNewMPG" className="add-mpg-container">

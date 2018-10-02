@@ -3,7 +3,6 @@ import Axios from 'axios';
 import moment from 'moment';
 import { combineReducers } from 'redux'
 
-import EntryFormReducer from './MGPEntryForm/ducks';
 import {createAction} from '@store/actions';
 
 // Actions
@@ -70,8 +69,7 @@ function MainReducer(state = initialState, action = {}) {
 
 // export the reducer and comvine with the form
 export default combineReducers({
-  main: MainReducer,
-  form: EntryFormReducer
+  main: MainReducer
 });
 
 //Actions

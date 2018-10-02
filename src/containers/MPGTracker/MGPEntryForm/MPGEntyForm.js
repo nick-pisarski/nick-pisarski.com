@@ -1,92 +1,174 @@
 // Third Party
 import React, { Component } from "react";
-import { connect } from 'react-redux';
 import {Form, Button} from 'react-bootstrap';
 import _ from 'lodash';
 
 // Compnonents and Constants
-import {FieldGroupHorizontal} from './FormComponents';
-import Modal from '@shared/ui/Modal/Modal';
-import { NON_ZERO_ERROR } from '@constants/errors';
+import LabelInput from '@shared/ui/Input/LabelInput'
 
-// Actions
-import { validateForm, handleFieldChange, resetForm, submitForm } from "./ducks";
+import Modal from '@shared/ui/Modal/Modal';
+import { NON_ZERO_ERROR, EMPTY_VALUE_ERROR } from '@constants/errors';
 
 //CSS
 import './MPGEntryForm.css';
 
+const initialState = {
+    fields: {
+        miles: {
+            value: 0,
+            type: 'number',
+            label: 'Miles Driven',
+            validState: null,
+            error: null,
+        },
+        gallons: {
+            value: 0,
+            type: 'number',
+            label: 'Gallons Used',
+            validState: null,
+            error: null,
+        },
+        total: {
+            value: 0,
+            type: 'number',
+            label: 'Total Cost',
+            validState: null,
+            error: null,
+        },
+        notes: {
+            value: '',
+            type: 'text',
+            label: 'Notes',
+            validState: null,
+            error: null,
+        }
+    },
+    error: null,
+    loading: false
+}
 
-// TODO Need to look into triggering a rerender of the components. and for them to use deep comparison
+/**
+ * Entry From for entering in an MPG
+ */
 
 class MPGEntryForm extends Component {
     
-    onComponentDidUnMount(){
-        this.props.reset();
+    constructor(props){
+        super(props);
+        this.state = _.cloneDeep(initialState);
     }
 
-    handleSubmit = evt => {
-        const isValid = this.validate();
-        if(isValid) {
-            // this comes from the props passed in from the MPG Tracker
-            this.props.onFormSubmitted();
-            this.props.submit();
-        }            
+    /**
+     * Handles the submitting of the form. Checks to if the form is valid and calls
+     * the on onFormSubmitted callback and closes the form. If it is not valid, then 
+     * the callback is NOT called and the form stays open. 
+     */
+    handleSubmit = () => {
+        const values = _.mapValues(this.state.fields, 'value');
+        if(this.isFormValid()) {
+            if(this.props.onFormSubmitted) this.props.onFormSubmitted(values)
+        }           
+        console.log('Submitted Data: ', values) 
     }  
 
-    validate = () => {
-        const fields = {...this.props.fields};
-        let valid = true;
-        _.forEach(['miles', 'gallons', 'total'], prop => {
-            if (parseFloat(fields[prop].value) < 1) {
-                fields[prop].valid = 'error';
-                fields[prop].error = NON_ZERO_ERROR;
-                valid = false;
-            }
-        })
+    /**
+     * Handles the change of a field
+     * @param {string} field - field to change
+     * @param {string|number} value - value to update the field with
+     * 
+     */
+    handleFieldChange = (field, value) => {
+        const fields = _.cloneDeep({...this.state.fields});
 
-        // update the redux state
-        this.props.validate(fields, valid);
-        return valid;
+        fields[field].value = fields[field].type === 'number' ? parseFloat(value) : value;    
+        
+        const valid = this.isFieldValid(field, fields[field].value);
+        if(valid === true){
+            fields[field].validState = null
+            fields[field].error = null
+        } else {
+            fields[field].validState = valid.validState
+            fields[field].error = valid.error
+        }
+
+        this.setState({fields});
     }
-    
+
+    /**
+     * Checks to see if every field in the form is valid
+     * @returns {bool} form is valid
+     */
+    isFormValid = () => {
+        // get array of validity of each field
+        const map = _.map(this.state.fields, (value, key) => this.isFieldValid(key, value.value))
+        return _.reduce(map, (currentValid, value) => !currentValid || value !== true ? false : true, true)
+    }
+
+    /**
+     * Checks the validity of a value for a field
+     * 
+     * @param {string} field - field to check
+     * @param {string|number} value - value to check
+     * 
+     * @return {bool} valid
+     */
+    isFieldValid = (field, value) => {
+        if(['miles', 'gallons', 'total'].indexOf(field) > -1){
+            if(!value){
+                return {
+                    validState: 'error',
+                    error: EMPTY_VALUE_ERROR
+                }
+            }
+            if (value < 1) {
+               return {
+                    validState: 'error',
+                    error: NON_ZERO_ERROR
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Creates inputs for all the fields of the the form
+     * 
+     * @return {Array} Array of JSX with all the state fields mapped to inputs
+     */
     renderFields = () => {
-        const {fields} = this.props;
-        return _.map(_.keys(fields), (prop) => {
-            const field = fields[prop];
+        const {fields} = this.state;
+        return _.map(fields, (value, prop) => {
+            const field = value;
             const props = {
                 key: `key-${prop}`,
                 id: `field-${prop}`,
-                type: field.type,
                 label: field.label,
-                onChange: (event)=> {this.props.handleChange(prop, event.target.value)},
+                onChange: (event)=> {this.handleFieldChange(prop, event.target.value)},
                 value: field.value,
-                validationState: field.valid,
+                validationState: field.validState,
             }
             if(field.type === 'text'){
                 props.componentClass = "textarea"
                 props.placeholder = "Enter notes here.."             
             } else {
                 props.min = 0;
-                props.value = parseFloat(field.value)
+                props.type = 'number'
+                props.value = parseFloat(field.value);
             }
 
             if(field.error){
                 props.help = field.error;
             }
-            return (<FieldGroupHorizontal {...props}/>)
+            return (<LabelInput horizontal={true} {...props}/>)
         })
     }
 
-    render(){
-        console.log('modal rendered')
+    render(){        
         return (
             <Modal 
                 title="Add New Entry"
                 show={this.props.show} 
-                handleHide={() => {
-                    this.props.reset();
-                    this.props.handleHide();
-                }} 
+                handleHide={() => this.props.handleHide()} 
                 footer={<Button onClick={this.handleSubmit}>Submit</Button>}
                 closeButton
             >
@@ -97,19 +179,4 @@ class MPGEntryForm extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        ...state.mpgTracker.form
-    }
-  }
-  
-  const mapDispatchToProps = dispatch => {
-    return {
-        validate: (fields, valid) => dispatch(validateForm(fields, valid)),
-        handleChange: (field, value) => dispatch(handleFieldChange(field, value)),
-        reset: () => dispatch(resetForm()),
-        submit: () => dispatch(submitForm())
-    };
-  }
-
-export default connect(mapStateToProps, mapDispatchToProps)(MPGEntryForm);
+export default MPGEntryForm;
