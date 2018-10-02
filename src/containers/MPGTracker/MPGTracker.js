@@ -26,6 +26,11 @@ class GasMPG extends Component{
         this.props.toggleForm(true);
     }
 
+    handleFormSubmit = (formData) => {
+        this.props.toggleForm(false);
+        console.log('Submitting the following data: ', formData);
+    }
+
     handleFormHide = () => {
         this.props.toggleForm(false);
     }
@@ -42,7 +47,7 @@ class GasMPG extends Component{
                 <MPGEntryForm 
                     show={props.showAddForm && !props.loading} 
                     handleHide={this.handleFormHide} 
-                    onFormSubmitted={() => this.props.toggleForm()}/>
+                    onFormSubmitted={data => this.handleFormSubmit(data)}/>
                 <Section title="Data" showContent={true}>
                     <SectionContent  className='data'>
                         <div id="addNewMPG" className="add-mpg-container">

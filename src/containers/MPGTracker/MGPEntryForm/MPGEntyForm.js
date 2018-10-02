@@ -4,7 +4,7 @@ import {Form, Button} from 'react-bootstrap';
 import _ from 'lodash';
 
 // Compnonents and Constants
-import LabelInput from '@shared/ui/Input/LabelInput'
+import { LabelInput } from '@shared/ui/Input/index';
 
 import Modal from '@shared/ui/Modal/Modal';
 import { NON_ZERO_ERROR, EMPTY_VALUE_ERROR } from '@constants/errors';
@@ -68,7 +68,6 @@ class MPGEntryForm extends Component {
         if(this.isFormValid()) {
             if(this.props.onFormSubmitted) this.props.onFormSubmitted(values)
         }           
-        console.log('Submitted Data: ', values) 
     }  
 
     /**
@@ -99,9 +98,22 @@ class MPGEntryForm extends Component {
      * @returns {bool} form is valid
      */
     isFormValid = () => {
-        // get array of validity of each field
-        const map = _.map(this.state.fields, (value, key) => this.isFieldValid(key, value.value))
-        return _.reduce(map, (currentValid, value) => !currentValid || value !== true ? false : true, true)
+        const fields = _.cloneDeep({...this.state.fields});
+        let formIsValid = true;
+        // Check validity of each field and update there status accordingly
+        // need to do this to show errors if someone trys to submit an empty form
+        // since validation occurs on change
+        _.forEach(fields, (value, key) => {
+            const valid = this.isFieldValid(key, value.value);
+            if(valid !== true){
+                fields[key].validState = valid.validState;
+                fields[key].error = valid.error;
+                formIsValid = false;
+            }
+            return valid
+        });
+        this.setState({fields})
+        return formIsValid;
     }
 
     /**
@@ -163,13 +175,21 @@ class MPGEntryForm extends Component {
         })
     }
 
+    renderFooter = () => {
+        return (
+            <React.Fragment>
+                <Button onClick={this.props.handleHide}>Cancel</Button>
+                <Button onClick={this.handleSubmit}>Submit</Button>
+            </React.Fragment>
+        )
+    }
     render(){        
         return (
             <Modal 
                 title="Add New Entry"
                 show={this.props.show} 
                 handleHide={() => this.props.handleHide()} 
-                footer={<Button onClick={this.handleSubmit}>Submit</Button>}
+                footer={this.renderFooter()}
                 closeButton
             >
                 <Form horizontal> {this.renderFields()} </Form>

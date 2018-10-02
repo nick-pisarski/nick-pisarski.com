@@ -6,8 +6,7 @@ export default function Input({help, ...props }) {
     return (
         <React.Fragment>
             <FormControl {...props} />
-                {help && <HelpBlock>{help}</HelpBlock>}
-            <FormControl.Feedback />
+            {help && <HelpBlock>{help}</HelpBlock>}
         </React.Fragment>
     );
   }
