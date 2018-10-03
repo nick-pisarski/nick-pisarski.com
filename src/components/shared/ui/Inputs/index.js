@@ -1,7 +1,7 @@
 import Input from './Input';
 import LabelInput from './LabelInput'
 
-export default {
-    Input, 
+export {
+    Input,
     LabelInput
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Glyphicon} from 'react-bootstrap'
 import {Section, SectionContent, LoadingIcon} from '@shared/ui/index';
-import Button from '@shared/ui/Buttons/Button';
+import HoverButton from '@shared/ui/Buttons/HoverButton/HoverButton';
 import Chart from './Chart/Chart';
 import MPGTable from './MPGTable/MPGTable';
 import MPGEntryForm from './MGPEntryForm/MPGEntyForm';
@@ -50,9 +51,7 @@ class GasMPG extends Component{
                     onFormSubmitted={data => this.handleFormSubmit(data)}/>
                 <Section title="Data" showContent={true}>
                     <SectionContent  className='data'>
-                        <div id="addNewMPG" className="add-mpg-container">
-                            <Button label="Add +" onClick={this.handleFormShow}/>
-                        </div>
+                            <HoverButton buttonText="Add" subButtonText={<Glyphicon glyph="plus"/>} onClick={this.handleFormShow}/>
                         <MPGTable 
                             data={props.data} 
                             loading={props.loading} 

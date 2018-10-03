@@ -1,10 +1,11 @@
 // Third Party
 import React, { Component } from "react";
-import {Form, Button} from 'react-bootstrap';
+import {Form, Glyphicon} from 'react-bootstrap';
+import HoverButton from '@shared/ui/Buttons/HoverButton/HoverButton';
 import _ from 'lodash';
 
 // Compnonents and Constants
-import { LabelInput } from '@shared/ui/Input/index';
+import { LabelInput } from '@shared/ui/Inputs/index';
 
 import Modal from '@shared/ui/Modal/Modal';
 import { NON_ZERO_ERROR, EMPTY_VALUE_ERROR } from '@constants/errors';
@@ -178,8 +179,15 @@ class MPGEntryForm extends Component {
     renderFooter = () => {
         return (
             <React.Fragment>
-                <Button onClick={this.props.handleHide}>Cancel</Button>
-                <Button onClick={this.handleSubmit}>Submit</Button>
+                <HoverButton 
+                    buttonText="Cancel"
+                    subButtonText={<Glyphicon glyph='remove' />}
+                    subButtonColor="red"
+                    onClick={this.props.handleHide}/>
+                <HoverButton 
+                    buttonText="Save" 
+                    subButtonText={<Glyphicon glyph='ok' />}
+                    onClick={this.handleSubmit}/>
             </React.Fragment>
         )
     }

@@ -1,0 +1,55 @@
+/* 
+  Made the button a little more dynamic, the sub button is now 
+  a percentage of the larger button and looks better on different screen sizes.
+  This needs to have some minimum or max widths
+ */
+
+
+ .HoverButton{
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.25);
+  border-radius: 3px;
+}
+
+.HoverButton p {
+  margin: inherit;
+}
+
+.HoverButton .button {
+  margin : 10px auto;
+  /* height : 50px; */
+  overflow: hidden;
+  text-align : center;
+  transition : .2s;
+  cursor : pointer;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+}
+.HoverButton .sub-button {
+  position : relative;
+  width : 20%;
+  height : 100px;
+  margin-top: -100px;
+  padding-top: 2px;
+  left : -20%;
+  transition : .3s;
+}
+.HoverButton .button-text {
+  transition : .3s;
+  margin: 10px auto;
+}
+.HoverButton .sub-button-text {
+  margin-top : 68px;
+
+}
+.HoverButton .button:hover .sub-button {
+  left: 0;
+}
+.HoverButton .button:hover .button-text{
+  margin-left : 65px;
+}
+.HoverButton .button:active {
+  box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
+}

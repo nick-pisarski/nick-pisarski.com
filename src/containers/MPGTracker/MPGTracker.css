@@ -1,7 +1,7 @@
 .MPGTracker{
     height: 100%;
     width: 80%;
-    position: relative;
+    /* position: relative; */
 }
 
 @media( max-width: 767px){
@@ -24,8 +24,8 @@
     background-color: beige;
 }
 
-.MPGTracker .data .add-mpg {
+/* .MPGTracker .data .add-mpg {
     background-color: brown;
     height: 40px;
     width: 100%;
-}
+} */
