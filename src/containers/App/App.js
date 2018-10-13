@@ -4,6 +4,7 @@ import {Route, Switch} from "react-router-dom";
 import HomePage from '@components/pages/HomePage/HomePage';
 import AppsPage from '@components/pages/Apps/AppsPage';
 import GasMPG   from '@containers/MPGTracker/MPGTracker';
+import LiftLogger   from '@containers/LiftLogger/LiftLogger';
 
 import {loginUser, logoutUser} from './ducks';
 
@@ -17,6 +18,7 @@ class App extends Component {
         <Header title="nick-pisarski.com" user={this.props.user} userLoggedIn ={this.props.isUserLoggedIn} onLogin={this.props.login} onLogout={this.props.logout}/>
           <Switch>
               <Route path="/apps/gasmpg" exact component={GasMPG} />
+              <Route path="/apps/liftlogger" exact component={LiftLogger} />
               <Route path="/apps" component={AppsPage} />
               <Route path="/" exact component={HomePage} />
           </Switch>
